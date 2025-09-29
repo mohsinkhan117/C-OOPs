@@ -2,7 +2,8 @@
 using namespace std;
 class ComplexNumbers
 {
-    int a = 0, b = 0;
+private:
+    float a = 0, b = 0;
     static int count;
 
 public:
