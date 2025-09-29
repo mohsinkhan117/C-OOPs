@@ -10,6 +10,8 @@ private:
     int age;
 
 public:
+    virtual string getType() const { return "Person"; }
+
     void inputDetails()
     {
         cout << "Enter Name: ";
@@ -22,8 +24,8 @@ public:
 
     void displayDetails() const
     {
-        cout << "Name: " << name << endl;
-        cout << "Age: " << age << endl;
+        cout << getType() << " has -> ";
+        cout << "Name: " << name << ", Age: " << age << endl;
     }
 };
 
@@ -33,48 +35,51 @@ private:
     char grade;
 
 public:
+    string getType() const override { return "Student"; }
+
     void inputStudentDetails()
     {
-
         inputDetails();
-
         cout << "Enter Grade: ";
         cin >> grade;
     }
 
     void displayStudentDetails() const
     {
-        cout << "Student Details: " << endl;
         displayDetails();
         cout << "Grade: " << grade << endl;
     }
 };
+
 class Employee : public Person
 {
+private:
     int salary;
 
 public:
-    void setEmployeeDetails();
-    void displayEmployeeDetails();
+    string getType() const override { return "Employee"; }
+
+    void setEmployeeDetails()
+    {
+        cout << "Enter Employee Details:" << endl;
+        inputDetails();
+        cout << "Salary: ";
+        cin >> salary;
+    }
+
+    void displayEmployeeDetails()
+    {
+        displayDetails();
+        cout << "Salary: " << salary << endl;
+    }
 };
-void Employee::setEmployeeDetails()
-{
-    cout << "Enter Employee Details:" << endl;
-    inputDetails();
-    cout << "Salary: ";
-    cin >> salary;
-}
-void Employee::displayEmployeeDetails()
-{
-    cout << "Employee Details: " << endl;
-    displayDetails();
-    cout << "Salary: " << salary;
-}
+
 int main()
 {
     Student s;
     s.inputStudentDetails();
     s.displayStudentDetails();
+
     Employee e;
     e.setEmployeeDetails();
     e.displayEmployeeDetails();
